@@ -1,0 +1,16 @@
+.modal{
+    position: fixed;
+    top: 10vh;
+    left: 1rem;
+    right: 1rem;
+    /* width: 100%; */
+    background-color: #575757;
+    box-shadow: 0.5rem 0.5rem 5px 0.5rem #353535;
+    padding: 1rem;
+    margin: 1rem;
+    z-index: 150;
+}
+.modal .close{
+    cursor: pointer;
+    float: left;
+}

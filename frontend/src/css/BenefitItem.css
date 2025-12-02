@@ -1,0 +1,15 @@
+.benefit-item{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: #363636;
+    margin:5px;
+    padding:5px;
+    /*          x   y   blur spread color */
+    box-shadow: 2px 3px 2px 4px #131313;    
+    border-radius: 5px;
+}
+.benefit-item h4{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}

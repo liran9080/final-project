@@ -1,0 +1,16 @@
+.message{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin: 5px;
+}
+.message > h4{
+    width: 50%;
+    border-radius: 5px;
+}
+.message .error{
+    border: 1px solid lightcoral
+}
+.message .success{
+    border: 1px solid lightgreen
+}

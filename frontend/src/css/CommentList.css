@@ -1,0 +1,9 @@
+.comment_list-container{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:5px;
+    height: 30vh;
+    overflow-y:auto;
+}

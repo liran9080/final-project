@@ -1,0 +1,15 @@
+.input-text{
+    display: flex;
+    justify-content: center;
+    gap:1rem;
+    margin:5px;
+    padding: 5px;
+}
+.input-text label{
+    min-width: 8%;
+    text-align: start;
+}
+.input-text input, .input-text textarea{
+    width: 40%;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}

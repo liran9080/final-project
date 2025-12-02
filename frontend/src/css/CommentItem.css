@@ -1,0 +1,40 @@
+.comment_item-container {
+
+    background-color: rgba(225, 175, 110, 0.673);
+    color: #112233;
+    border-radius: 5px;
+    width: 90%;
+    margin:5px;
+    padding:5px;
+}
+
+.comment_item-container>h4 {
+    margin: 2px;
+    margin-top: 1px;
+    text-align: start;
+}
+
+.comment_item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment_item-header-text {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.comment_item-header-actions {
+    display: flex;
+    gap: 5px;
+    justify-content: space-around;
+}
+
+.comment_item-header p {
+    margin: 2px;
+    margin-bottom: 1px;
+}
+
+.comment_item-edit{
+    cursor: pointer;
+}

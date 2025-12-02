@@ -1,0 +1,10 @@
+.menu{
+    display:flex;
+    justify-content: space-around;
+    gap: 1rem;
+    font-size: 1.2em;
+}
+.menu a:hover{
+    border-radius: 5px;
+    background-color: bisque;
+}

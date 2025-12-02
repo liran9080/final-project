@@ -1,0 +1,21 @@
+.page-head{
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+}
+.page-head .col{
+    display:flex;
+    flex:1;
+}
+
+.page-head .col-left{
+    justify-content: end;
+}
+.page-head .col-right{
+    justify-content: start;
+}
+.page-head .col-center{
+    justify-content: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}

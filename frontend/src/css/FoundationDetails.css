@@ -1,0 +1,13 @@
+.foundation_details-container{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:3px;
+    width: 100%;
+}
+.foundation_details-container > h2{
+    margin:2px;
+}
+.foundation_details-container > p{
+    margin:2px;
+}

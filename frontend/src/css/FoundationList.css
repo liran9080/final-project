@@ -1,0 +1,7 @@
+.foundation-list{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    height: 25vh;
+    overflow-y: auto;
+}

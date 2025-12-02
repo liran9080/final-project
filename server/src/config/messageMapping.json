@@ -1,0 +1,9 @@
+{
+    "comment":{
+        "foundation_not_found":"העמותה לתגובה אינה קיימת",
+        "comment_not_sent":"לא נשלחה תגובה",
+        "invalid_foundation":"העמותה שנשלחה חסרה או אינה תקינה",
+        "invalid_userId":"המשתמש המחובר אינו המשתמש בתגובה",
+        "invalid_commentId":"מזהה התגובה אינו תקין"
+    }
+}

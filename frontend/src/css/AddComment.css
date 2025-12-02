@@ -1,0 +1,10 @@
+.add_comment-container{
+    
+}
+.add_comment-container > h4{
+    margin: 2px;
+}
+.add_comment-inputs{
+    display:flex;
+    align-items: center;
+}
