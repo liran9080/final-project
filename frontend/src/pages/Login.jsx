@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom'
 import AuthContext from "../context/AuthContext";
 import useToggle from "../hooks/useToggle";
 
-function Login({setUser}) {
+function Login() {
     const nav = useNavigate();
     const context = useContext(AuthContext)
     const {send, message, loading, isError, setMessage, setIsError} = useHttp()
