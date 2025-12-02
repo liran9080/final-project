@@ -8,7 +8,7 @@ import { Routes, Route } from 'react-router-dom'
 import Menu from './components/Menu'
 import Search from './pages/Search'
 import FoundationDetails from './pages/FoundationDetails'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import AuthContext from './context/AuthContext'
 import './App.css'
 
