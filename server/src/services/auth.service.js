@@ -1,6 +1,8 @@
 import models from '../models/index.js'
 import passwordService from '../middleware/password.service.js'
 import AppError from '../errors/appError.js'
+import userService from './user.service.js'
+import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 
 const { User } = models
 
@@ -17,27 +19,21 @@ const register = async(user) => {
 const login = async (email, password) => {
 
     // מוודאים שהאימייל לא קיים
-    const existingUser = await findUserByEmail(email)
+    const existingUser = await userService.findUserByEmail(email)
     
     if (!existingUser) {
-        throw new AppError(`email ${email} or password are incorrect not exist`, 400)
+        throw new AppError(messageMapping.auth.email_password_incorrect, 400)
+    }
+    if(existingUser.isDisabled){
+        throw new AppError(messageMapping.auth.user_disabled, 400)
     }
     if (await passwordService.verifyPassword(password, existingUser.password)) {
         const { password, ...userWithoutPassword } = existingUser.get();
         return userWithoutPassword;
     } else {
-        throw new AppError(`email ${email} or password are incorrect not exist`, 400)
+        throw new AppError(messageMapping.auth.email_password_incorrect, 400)
     }
 }
 
 
-const findUserByEmail = async (email) => {
-    const existingUser = await User.findOne({
-        where: {
-            email: email
-        }
-    })
-    return existingUser
-}
-
-export default { register, login, findUserByEmail }
+export default { register, login }

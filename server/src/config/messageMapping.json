@@ -1,9 +1,28 @@
 {
-    "comment":{
-        "foundation_not_found":"העמותה לתגובה אינה קיימת",
-        "comment_not_sent":"לא נשלחה תגובה",
-        "invalid_foundation":"העמותה שנשלחה חסרה או אינה תקינה",
-        "invalid_userId":"המשתמש המחובר אינו המשתמש בתגובה",
-        "invalid_commentId":"מזהה התגובה אינו תקין"
-    }
+  "comment": {
+    "foundation_not_found": "העמותה לתגובה אינה קיימת",
+    "comment_not_sent": "לא נשלחה תגובה",
+    "invalid_foundation": "העמותה שנשלחה חסרה או אינה תקינה",
+    "invalid_userId": "המשתמש המחובר אינו המשתמש בתגובה",
+    "invalid_commentId": "מזהה התגובה אינו תקין"
+  },
+  "user": {
+    "not_found": "המשתמש לא נמצא",
+    "email_exist": "האימייל שהוקלד נמצא בשימוש",
+    "invalid_data": "הפרטים שניתנו אינם תקינים",
+    "invalid_password": "הסיסמא הקיימת אינה נכונה",
+    "password_updated": "הסיסמא עודכנה בהצלחה",
+    "no_permissions": "לא ניתן לבצע את הפעולה על משתמש אחר",
+    "incorrect_state_enable": "משתמש זה אינו מושבת",
+    "incorrect_state_disable": "משתמש זה אינו פעיל"
+  },
+  "auth": {
+    "not_admin": "דרושה הרשאת מנהל",
+    "email_password_incorrect": "שם משתמש או סיסמא אינם נכונים",
+    "user_disabled": "משתמש זה מושבת"
+  },
+  "benefit":{
+    "not_found": "זכות לא נמצאה",
+    "deleted_ok":"הזכות נמחקה בהצלחה"
+  }
 }

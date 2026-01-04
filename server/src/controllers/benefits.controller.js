@@ -1,4 +1,5 @@
-import service from '../services/benefits.service.js'
+import service from '../services/benefits.service.js';
+import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 
 const getBenefit = async (req, res) => {
     const { benefitId } = req.params;
@@ -54,4 +55,13 @@ const updateBenefit = async(req, res) => {
     }
 }
 
-export default {getBenefit, getBenefits, addBenefit, updateBenefit}
+const deleteBenefit = async(req, res) => {
+    const { benefitId } = req.params;
+    try{
+        await service.deleteBenefit(benefitId)
+        res.send({message:messageMapping.benefit.deleted_ok})
+    }catch(error){
+        res.status(error.httpCode || 500).json({ message: error.message })
+    }
+}
+export default {getBenefit, getBenefits, addBenefit, updateBenefit, deleteBenefit}

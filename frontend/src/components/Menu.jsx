@@ -15,6 +15,8 @@ function Menu(){
        {!authData &&<> <Link to='/login'>כניסה</Link>
         <Link to='/register'>רישום</Link></>}
         {authData && <Link onClick={logout} to='/login'>יציאה</Link>}
+        {authData && <Link to={`/users/${authData.user.userId}`}>פרטי משתמש</Link>}
+        {authData && authData.user.isAdmin && <Link to='/users'>משתמשי האתר</Link>}
         <Link to='/categories'>קטגוריות</Link>
         <Link to='/search'>חיפוש</Link>
       </div>        

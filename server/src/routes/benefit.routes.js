@@ -8,5 +8,6 @@ benefitRoutes.get('', controller.getBenefits)
 benefitRoutes.get('/:benefitId', controller.getBenefit)
 benefitRoutes.post('', tokenService.verifyToken, tokenService.verifyAdmin, controller.addBenefit)
 benefitRoutes.put('/:benefitId', tokenService.verifyToken, tokenService.verifyAdmin,controller.updateBenefit)
+benefitRoutes.delete('/:benefitId', controller.deleteBenefit)
 
 export default benefitRoutes;

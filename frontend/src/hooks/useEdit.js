@@ -1,22 +1,23 @@
 import { useState, useCallback } from 'react'
-import useHttp from './useHttp';
+// import useHttp from './useHttp';
 
 const useEdit = (send) => {
     const [itemId, setItemId] = useState(-1);
 
-    const editItem = useCallback((commentId) => {
-        console.log(commentId);
+    const editItem = useCallback((itemId) => {
+        console.log(itemId);
 
-        setItemId(commentId)
+        setItemId(itemId)
     }, [])
     const closeEditItem = useCallback(() => {
         setItemId(-1)
     }, [])
 
-    const deleteItem = useCallback((itemId, apiFunc, postDeleteFunc) => {        
+    const deleteItem = useCallback((itemId, apiFunc, postDeleteFunc) => {  
+        if(!send) return;
         send({ func: apiFunc, id: itemId }).then(result => {
             if (result.ok) {
-                postDeleteFunc?.();
+                postDeleteFunc?.(result);
             }
         })
     }, [])

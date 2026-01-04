@@ -34,7 +34,6 @@ const addComment = async (comment) => {
 
 const updateComment = async (commentId, comment) => {
 
-
     const existingComment = await Comment.findByPk(commentId)
 
     if (!existingComment) {

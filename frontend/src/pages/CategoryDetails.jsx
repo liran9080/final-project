@@ -23,6 +23,8 @@ import EditBenefit from "../components/EditBenefit";
 import EditFoundation from "../components/EditFoundation";
 import AuthContext from "../context/AuthContext";
 import { generalSort } from "../utils/sortUtil";
+import useConfirm from '../hooks/useConfirm';
+import Confirm from '../components/gui/Confirm';
 
 function CategoryDetails() {
     const params = useParams();
@@ -30,14 +32,15 @@ function CategoryDetails() {
     const { isAdmin } = useContext(AuthContext)
 
 
-    const { send, message, loading, isError } = useHttp(true)
+    const { send, message, setMessage, setIsError, loading, isError } = useHttp(true)
     const [category, setCategory] = useState(null);
     const [benefits, setBenefits] = useState([]);
     const [foundations, setFoundations] = useState([]);
 
-    const { itemId: editBenefitId, editItem: editBenefit, closeEditItem: closeEditBenefit, } = useEdit(send);
+    const { itemId: editBenefitId, editItem: editBenefit, closeEditItem: closeEditBenefit, deleteItem } = useEdit(send);
     const { itemId: editFoundationId, editItem: editFoundation, closeEditItem: closeEditFoundation, } = useEdit(send);
 
+    const confirm = useConfirm();
 
     const { toggle: toggleFoundation, isOn: showFoundation } = useToggle();
     const { toggle: toggleBenefit, isOn: showBenefit } = useToggle();
@@ -69,23 +72,42 @@ function CategoryDetails() {
     }, [])
 
 
-
     // add\edit benefits
     const updateBenefits = useCallback((benefit) => {
         // const t = benefits.filter(b => b.benefitId != benefit.benefitId)
         // const t2 = [...t, benefit]
         setBenefits((currentBenefits) => {
-            const tempArr = generalSort([...currentBenefits.filter(b => b.benefitId != benefit.benefitId), benefit])
+            const tempArr = generalSort([...currentBenefits.filter(b => b.benefitId != benefit.benefitId), benefit], 'title')
             return tempArr;
         })
     }, [])
+
+    const confirmBenefitDelete = (benefit) => {
+        confirm.setSubject(benefit)
+        confirm.setPrompt(`האם למחוק את הזכות ${benefit.title}`)
+        confirm.show();
+    }
+    const deleteBenefit = async () => {
+        deleteItem(confirm.subject.benefitId, benefitApi.deleteBenefit, (deleteResult) => {
+            console.log(deleteResult.data);
+            confirm.hide()
+            setIsError(false);
+            setMessage(deleteResult.data.message)
+            // מחיקת הזכות מרשימת הזכויות
+            setBenefits((currentBenefits) => {
+                const tempArr = currentBenefits.filter(b => b.benefitId != confirm.subject.benefitId)
+                return tempArr;
+            })
+        })
+    }
+
 
 
     // add\edit foundations
     const updateFoundations = useCallback((foundation) => {
         setFoundations((currentFoundations) => {
             const tempArr = [...currentFoundations.filter(f => f.foundationId != foundation.foundationId), foundation];
-            generalSort(tempArr)
+            generalSort(tempArr, 'name')
             return tempArr;
         })
     }, [])
@@ -106,17 +128,18 @@ function CategoryDetails() {
                     title={`זכויות בנושא ${category.name}`}
                     right={isAdmin() && <>
                         {/* <Link to={`/add-benefit/${category.id}`}><button>הוספת זכות</button></Link> */}
-                        <button onClick={toggleBenefit}>הוספת זכות</button>
-                        <button onClick={toggleFoundation}>הוספת עמותה</button>
+                        <button onClick={toggleBenefit}>+ זכות</button>
+                        <button onClick={toggleFoundation}>+ עמותה</button>
                     </>} />
 
             </div>
+            <Modal component={<Confirm question={confirm.prompt} onNo={confirm.hide} onYes={deleteBenefit} />} isOn={confirm.isVisible} onClose={confirm.hide} />
             <Modal component={<AddFoundation onSuccess={updateFoundations} />} onClose={toggleFoundation} isOn={showFoundation} />
             <Modal component={<AddBenefit onSuccess={updateBenefits} />} onClose={toggleBenefit} isOn={showBenefit} />
 
             <Modal component={<EditBenefit benefitId={editBenefitId} onClose={closeEditBenefit} postSave={updateBenefits} />} onClose={closeEditBenefit} isOn={editBenefitId > -1} />
             <Modal component={<EditFoundation foundationId={editFoundationId} onClose={closeEditFoundation} postSave={updateFoundations} />} onClose={closeEditFoundation} isOn={editFoundationId > -1} />
-            <BenefitList benefits={benefits} editBenefit={editBenefit} />
+            <BenefitList benefits={benefits} editBenefit={editBenefit} deleteBenefit={confirmBenefitDelete} />
             <h4>רשימת עמותות {category.name}</h4>
             <FoundationList foundations={foundations} editFoundation={editFoundation} />
         </div>

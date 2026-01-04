@@ -1,20 +1,17 @@
 import express from 'express'
 import cors from 'cors'
 
+import categoriesRoutes from './src/routes/category.routes.js'
+import benefitRoutes from './src/routes/benefit.routes.js'
+import userRoutes from './src/routes/user.routes.js'
+import authRoutes from './src/routes/auth.routes.js'
+import commentRoutes from './src/routes/comment.routes.js'
+import foundationRoutes from './src/routes/foundation.routes.js'
+import searchRouter from './src/routes/search.routes.js'
 
-import categoriesRoutes from './routes/category.routes.js'
-import benefitRoutes from './routes/benefit.routes.js'
-import userRoutes from './routes/user.routes.js'
-import authRoutes from './routes/auth.routes.js'
-import commentRoutes from './routes/comment.routes.js'
-import foundationRoutes from './routes/foundation.routes.js'
-import searchRouter from './routes/search.routes.js'
+import tokenService from './src/middleware/token.service.js'
 
-import tokenService from './middleware/token.service.js'
-
-
-import models, {sequelize} from './models/index.js'
-import {initcategories} from './services/categories.service.js'
+import models, {sequelize} from './src/models/index.js'
 
 
 const PORT = 5566
@@ -27,7 +24,7 @@ app.use(express.json())
 // http verbs: get, post, put, patch, delete, option
 //http://127.0.0.1:5566 /api/foundations/1
 app.use('/api/auth', authRoutes)
-app.use('/api/userRoutes', tokenService.verifyToken, userRoutes)
+app.use('/api/users', tokenService.verifyToken, userRoutes)
 app.use('/api/categories', categoriesRoutes)
 app.use('/api/benefits', benefitRoutes)
 app.use('/api/comments', commentRoutes)
@@ -39,7 +36,9 @@ app.use('/api/search', searchRouter)
 
 const startServer = async () => {
     await sequelize.sync({alter:false})
-    initcategories();
+    // const category = await models.Category.create({
+    //     name:'השכלה'
+    // })
 }
 app.listen(PORT, (error) => {
     if (error) {

@@ -8,8 +8,9 @@ import CommentModel from './comment.model.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
- // 'postgres://user:password@10.0.0.10:5432/database'
- export const sequelize = new Sequelize(process.env.DB_URL)
+// 'postgres://user:password@10.0.0.10:5432/database'
+export const sequelize = new Sequelize(process.env.DB_URL)
+
 
 const models = {
   Category: CategoryModel(sequelize),

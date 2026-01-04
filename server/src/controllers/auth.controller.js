@@ -1,4 +1,5 @@
 import service from '../services/auth.service.js'
+import userService from '../services/user.service.js'
 import tokenService from '../middleware/token.service.js'
 
 const ADMIN_CODE = '12rsd1'
@@ -29,7 +30,7 @@ const register = async (req, res) => {
         }else{
             user.isAdmin = false;
         }
-        const existingUser = await service.findUserByEmail(user.email); // נבדוק אם האימייל כבר קיים
+        const existingUser = await userService.findUserByEmail(user.email); // נבדוק אם האימייל כבר קיים
         if (existingUser) {   // אם האימייל קיים נחזיר שגיאה עם הודעה
             res.status(400).send({ message: 'email already exist' });
             return;

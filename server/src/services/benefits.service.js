@@ -1,6 +1,7 @@
 import AppError from '../errors/appError.js'
 import { Op } from 'sequelize'
 import models from '../models/index.js'
+import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 import { isCategoryExists } from './categories.service.js'
 
 const { Benefit } = models
@@ -24,7 +25,7 @@ const getBenefits = async (categoryId) => {
 
         return benefits;
     } catch (error) {
-        if(error.httpCode){
+        if (error.httpCode) {
             throw error
         }
         throw new AppError("database error " + error.message, 500)
@@ -40,31 +41,31 @@ const addBenefit = async (benefit) => {
 
         return createdBenefit;
     } catch (error) {
-        if(error.httpCode){
+        if (error.httpCode) {
             throw error
         }
         throw new AppError("database error " + error.message, 500)
     }
 }
 
-const updateBenefit = async(benefitId, benefit) => {
-    
+const updateBenefit = async (benefitId, benefit) => {
+
     try {// מוודאים שהקטגוריה קיימת
         isCategoryExists(benefit.categoryId)
 
         const existingBenefit = await Benefit.findByPk(benefitId)
 
-        if(!existingBenefit){
+        if (!existingBenefit) {
             throw new AppError("invalid benefit", 400)
         }
 
         existingBenefit.title = benefit.title;
         existingBenefit.description = benefit.description;
-        
+
         const updatedBenefit = await existingBenefit.save()
         return updatedBenefit;
     } catch (error) {
-        if(error.httpCode){
+        if (error.httpCode) {
             throw error
         }
         throw new AppError("database error " + error.message, 500)
@@ -83,6 +84,14 @@ const searchBenefits = async (text, area) => {
     return results;
 }
 
+const deleteBenefit = async (benefitId) => {
+    const existingBenefit = await Benefit.findByPk(benefitId)
+
+    if (!existingBenefit) {
+        throw new AppError(messageMapping.benefit.not_found, 404)
+    }
+    await existingBenefit.destroy()
+}
 
 
-export default { getBenefit, getBenefits, addBenefit, updateBenefit, searchBenefits }
+export default { getBenefit, getBenefits, addBenefit, updateBenefit, searchBenefits, deleteBenefit }

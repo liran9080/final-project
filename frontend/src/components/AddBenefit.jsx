@@ -6,10 +6,11 @@ import Message from "../components/Message";
 import Spinner from "../components/Spinner";
 import benefitApi from "../api/benefitApi";
 import useHttp from "../hooks/useHttp";
-import Back from "../components/Back";
+import useToggle from "../hooks/useToggle";
 import PageHead from "../components/PageHead";
 
 function AddBenefit({ onSuccess }) {
+    const {toggle, isOn} = useToggle()
     const params = useParams();
     const { send, message, loading, isError, setIsError, setMessage } = useHttp()
     const [benefit, setBenefit] = useState({ title: '', description: '', categoryId: 0 })
@@ -28,12 +29,14 @@ function AddBenefit({ onSuccess }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if(isOn)return;
         console.log(benefit);
 
         send({ func: benefitApi.addBenefit, data: benefit, }).then(result => {
             if (result.ok) {
                 setIsError(false)
                 setMessage('הזכות התווספה בהצלחה')
+                toggle();
                 setTimeout(() => {
                     onSuccess(result.data)
                 }, 3000)
@@ -51,7 +54,7 @@ function AddBenefit({ onSuccess }) {
             <form onSubmit={handleSubmit}>
                 <InputText id="title" label="זכות" placeholder="כותרת הזכות" value={benefit.title} onChange={handleChange} />
                 <Textarea id="description" label="תיאור" placeholder="תיאור הזכות" value={benefit.description} onChange={handleChange} />
-                <button>שמירה</button>
+                {!isOn && <button>שמירה</button>}
             </form>
         </div>
     )

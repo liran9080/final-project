@@ -20,5 +20,11 @@ const updateBenefit = ({token, id, data}) =>{
           body:JSON.stringify(data)
      }); 
 }
+const deleteBenefit = ({token,id}) => {
+     return fetch(`${SERVER}/api/benefits/${id}`,{
+          method:'DELETE',
+          headers:{authorization:`bearer ${token}`},
+     });
+}
 
-export default {getBenefits, addBenefit, updateBenefit, getBenefit}
+export default {getBenefits, addBenefit, updateBenefit, getBenefit, deleteBenefit}

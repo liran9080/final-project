@@ -9,11 +9,12 @@ import foundationApi from "../api/foundationApi";
 import categoryApi from "../api/categoryApi";
 import useHttp from "../hooks/useHttp";
 import Message from "./Message";
-import Back from "./Back";
+import useToggle from "../hooks/useToggle";
 import Spinner from "./Spinner";
 
 function AddFoundation({onSuccess}) {
     const params = useParams()
+    const {isOn, toggle} = useToggle();
     const {send, message, loading, isError, setMessage, setIsError} = useHttp(true)
     const [foundation, setFoundation] = useState({ categoryId: 1, name: '', area: '', address: '', phone: '', email: '', description: '' })
     const [areas, setAreas] = useState([])
@@ -51,10 +52,12 @@ function AddFoundation({onSuccess}) {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
+        if(isOn)return;
         send({func:foundationApi.addFoundation, data:foundation}).then(result => {
             if(result.ok){
                 setIsError(false)
                 setMessage('העמותה התווספה בהצלחה')
+                toggle();
                 setTimeout( () => {
                     onSuccess(result.data)
                 }, 3000)
@@ -77,7 +80,7 @@ function AddFoundation({onSuccess}) {
                 <InputText id="phone" label="טלפון"  placeholder="טלפון העמותה" value={foundation.phone} onChange={handleChange}/>
                 <InputText type="email" id="email" label="אימייל"  placeholder="אימייל העמותה" value={foundation.email} onChange={handleChange}/>
                 <Textarea id="description" label="תיאור"  placeholder="תיאור העמותה" value={foundation.description} onChange={handleChange}/>
-                <button>שמירה</button>
+                {!isOn && <button>שמירה</button>}
             </form>
         </div>
     )

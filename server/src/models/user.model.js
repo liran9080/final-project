@@ -12,6 +12,7 @@ export default (sequelize) =>{
         password:{type:DataTypes.STRING, allowNull:false},
         fullName:{type:DataTypes.STRING, allowNull:false},
         isAdmin:{type:DataTypes.BOOLEAN, allowNull:false},
+        isDisabled:{type:DataTypes.BOOLEAN, allowNull:false, defaultValue:false},
     },{sequelize,modelName:'User', tableName:'users'});
     return User
 }

@@ -1,4 +1,16 @@
 
 .search-bar{
     display: flex;
+    width:100%;
+    align-items: baseline;
+}
+.search-bar > div{
+    padding: 5px 5%
+}
+.search-bar label{
+    width:100%;
+}
+.search-result_title{
+    margin-top:10px;
+    margin-bottom:5px;
 }

@@ -1,5 +1,5 @@
 import Jwt from 'jsonwebtoken'
-
+import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 const SERVER_PASSWORD = '1q@W3e$R5t'
 const NUM_OF_PAYLOAD_FIELDS = 4;
 
@@ -44,10 +44,12 @@ const verifyAdmin = (req, res, next) => {
         res.status(401).send({ message: "missing authorization, please sign in" });
         return;
     }
-    if(req.user.isAdmin == false){
-        res.status(403).send({ message: "You do not have permissions" });
-        return;
+
+    if(req.user.isAdmin == true){
+        next()
+    }else{
+        res.status(403).send({ message: messageMapping.auth.not_admin});
     }
-    next()
+    
 }
 export default { createToken, verifyToken, verifyAdmin }
