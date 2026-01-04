@@ -1,0 +1,13 @@
+.registration-code{
+    display: flex;
+    align-items: center ;
+}
+.registration-code div{
+    padding: 10%;
+}
+.registration-code label{
+    width: 60%;
+}
+.registration-code input{
+    width: 40%;
+}

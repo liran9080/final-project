@@ -6,6 +6,8 @@ import Message from "../components/Message";
 import PageHead from "../components/PageHead";
 import { useNavigate } from "react-router-dom";
 
+import '../css/register.css'
+
 function Register() {
     const nav = useNavigate()
     const { send, message, loading, isError, setMessage, setIsError } = useHttp()
@@ -53,7 +55,7 @@ function Register() {
                 <InputText id="email" type="email" value={user.email} label="אימייל" placeholder="הקלידו את כתובת האימייל שלכם" onChange={handleChange} rtl={false} />
                 <InputText id="password" type="password" value={user.password} label="סיסמא" placeholder="הקלידו את הסיסמא" onChange={handleChange} rtl={false} />
 
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div className='registration-code' >
                     <InputText id="adminNoCode" name='adminCode' value="false" type="radio" label="אין לי קוד" checked={!hasAdminCode} onChange={handleHasAdminCode} rtl={false} />
                     <InputText id="adminhasCode" name='adminCode' value="true" type="radio" label="יש לי קוד" checked={hasAdminCode} onChange={handleHasAdminCode} rtl={false} />
                     {hasAdminCode && <InputText id="adminCode" value={adminCode} label="קוד" placeholder="הקלידו את הקוד" onChange={handleAdminCode} rtl={false} />}
