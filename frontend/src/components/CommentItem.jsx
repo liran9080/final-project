@@ -4,15 +4,17 @@ import { useContext } from 'react';
 import '../css/CommentItem.css'
 import AuthContext from '../context/AuthContext';
 
-function CommentItem({ comment, editComment, deleteComment }) {
+function CommentItem({ comment, index, editComment, deleteComment }) {
     const { isLoggedin, authData } = useContext(AuthContext)
     const formatDate = (dateString) => new Date(dateString).toLocaleString('he')
-    const canEdit = isLoggedin() && comment.userId == authData.user.userId
+    const canEdit = isLoggedin() && comment.userId == authData.user.userId;
+    console.log(index);
+    
     return (
         <div className='comment_item-container' >
             <div className='comment_item-header'>
                 <div className='comment_item-header-text'>
-                    <p>{comment.userId})</p>
+                    <p>{index})</p>
                     <p>{formatDate(comment.createdAt)}</p>
                 </div>
                 {canEdit && <div className='comment_item-header-actions'>

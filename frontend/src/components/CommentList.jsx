@@ -8,7 +8,7 @@ function CommentList({ comments, editComment, deleteComment }) {
     return (
         <div className="comment_list-container">
             {
-                comments.map(comment => <CommentItem key={comment.commentId} comment={comment} editComment={editComment} deleteComment={deleteComment}/>)
+                comments.map((comment,i) => <CommentItem key={comment.commentId} index={i+1}  comment={comment} editComment={editComment} deleteComment={deleteComment}/>)
             }
         </div>
     )
