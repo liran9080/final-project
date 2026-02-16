@@ -21,7 +21,7 @@ function FoundationItem({ foundation, editFoundation }) {
         <Link to={`/foundations/${foundation.foundationId}`} className='foundation-item'>
             <h4>{foundation.name}</h4>
             {isOn && <div>
-                <div>
+                <div className='foundation-item_details'>
                     <span>{foundation.area}</span>
                     <span>{foundation.address}</span>
                     <span>{foundation.phone}</span>

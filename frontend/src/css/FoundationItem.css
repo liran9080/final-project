@@ -17,3 +17,8 @@
 .foundation-item:hover{
     color: white;
 }
+.foundation-item_details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
