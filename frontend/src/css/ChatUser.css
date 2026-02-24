@@ -1,0 +1,20 @@
+/* זה הקובץ ChatUser.css - כאן אני מגדיר את הפונט והצבע של שם המשתמש */
+/* הגדרות עיצוב לשם המשתמש שמוצג בצד */
+.user-name {
+    /* מגדיר את סוג הגופן כדי שייראה מסודר וקריא */
+    font-family: Arial, sans-serif;
+    /* קובע את גודל הכתב כמו שביקשו בדרישות המשימה */
+    font-size: 16px;
+    /* מגדיר את צבע הטקסט שיהיה שחור-אפור בולט */
+    color: #333333;
+}
+
+.chat-user-names{
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-user-names > p{
+    font-weight: bold;
+    color: #dedede;
+}

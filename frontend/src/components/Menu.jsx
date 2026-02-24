@@ -18,6 +18,7 @@ function Menu(){
         {authData && <Link to={`/users/${authData.user.userId}`}>פרטי משתמש</Link>}
         {authData && authData.user.isAdmin && <Link to='/users'>משתמשי האתר</Link>}
         <Link to='/categories'>קטגוריות</Link>
+        {authData && <Link to='/chats'>שיחות</Link>}
         <Link to='/search'>חיפוש</Link>
       </div>        
     )

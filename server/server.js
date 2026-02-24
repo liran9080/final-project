@@ -35,7 +35,7 @@ app.use('/api/search', searchRouter)
 
 
 const startServer = async () => {
-    await sequelize.sync({alter:false})
+    await sequelize.sync({alter:true})
     // const category = await models.Category.create({
     //     name:'השכלה'
     // })

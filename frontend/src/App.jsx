@@ -12,7 +12,9 @@ import UserList from './pages/UserList'
 import FoundationDetails from './pages/FoundationDetails'
 import { useContext, useEffect } from 'react'
 import AuthContext from './context/AuthContext'
+import ChatPage from './pages/ChatPage'
 import './App.css'
+
 
 function App() {
   const {isLoggedin, authData} = useContext(AuthContext)
@@ -32,6 +34,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/categories' element={<Categories/>}/>
         <Route path='/categories/:categoryId' element={<CategoryDetails/>}/>
+        <Route path='/chats' element={<ChatPage/>}/>
         <Route path='/rights/:id' element={<RightDetails/>}/>
         <Route path='/foundations/:id' element={<FoundationDetails/>}/>
         <Route path='/search' element={<Search/>}/>

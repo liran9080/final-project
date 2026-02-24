@@ -2,9 +2,10 @@
 import { Sequelize } from "sequelize";
 import CategoryModel from './category.model.js'
 import BenefitModel from './benefit.model.js'
-import FoundationModel from './foundation.model.js'
+import FoundationModel, {Foundation2UserModel} from './foundation.model.js'
 import UserModel from './user.model.js'
 import CommentModel from './comment.model.js'
+import ChatModel from './chat.model.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -17,7 +18,9 @@ const models = {
   Benefit: BenefitModel(sequelize),
   Foundation: FoundationModel(sequelize),
   User: UserModel(sequelize),
-  Comment: CommentModel(sequelize)
+  Comment: CommentModel(sequelize),
+  Foundation2User:Foundation2UserModel(sequelize),
+  Chat: ChatModel(sequelize)
 }
  Object.values(models).forEach( model => {
   if( typeof model.associate == "function"){

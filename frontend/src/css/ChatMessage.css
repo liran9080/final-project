@@ -1,0 +1,28 @@
+/* זה הקובץ ChatMessage.css - פה הגדרתי את הפונט והצבע של ההודעה לפי המשימה */
+/* עיצוב התיבה שעוטפת את כל פרטי ההודעה */
+.message-container {
+    /* מגדיר את סוג הגופן של הטקסט בהודעה */
+    font-family: Tahoma, sans-serif;
+    /* קובע את גודל הכתב של ההודעה */
+    font-size: 14px;
+    /* מגדיר את הצבע של הטקסט בהודעה */
+    color: #000000;
+    /* מוסיף מסגרת אפורה עדינה כדי להפריד בין הודעות */
+    /* border: 1px solid #cccccc; */
+    background-color: #333;
+    border-radius: 15px;
+    /* יוצר ריווח פנימי כדי שהטקסט לא יידבק למסגרת */
+    padding: 10px;
+    /* מוסיף רווח קטן מתחת להודעה כדי שלא יידבקו אחת לשנייה */
+    margin-bottom: 5px;   
+    
+}
+
+.message-content{
+    display: flex;
+    justify-content: space-between;
+    color: #dedede;
+}
+.message-content > span{
+    margin-left: 5px;
+}
