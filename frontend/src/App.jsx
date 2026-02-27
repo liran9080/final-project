@@ -14,6 +14,8 @@ import { useContext, useEffect } from 'react'
 import AuthContext from './context/AuthContext'
 import ChatPage from './pages/ChatPage'
 import './App.css'
+import ProfessionalRequests from './pages/ProfessionalRequests'
+import UserRequests from './pages/UserRequests'
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
         <Route path='/categories' element={<Categories/>}/>
         <Route path='/categories/:categoryId' element={<CategoryDetails/>}/>
         <Route path='/chats' element={<ChatPage/>}/>
+        {isLoggedin() && authData.user.isProfessional && <Route path='/requests' element={<ProfessionalRequests/>}/>}
+        {isLoggedin() && !authData.user.isProfessional && <Route path='/requests' element={<UserRequests/>}/>}
         <Route path='/rights/:id' element={<RightDetails/>}/>
         <Route path='/foundations/:id' element={<FoundationDetails/>}/>
         <Route path='/search' element={<Search/>}/>
