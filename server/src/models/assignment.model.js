@@ -1,21 +1,22 @@
 import {DataTypes, Model} from 'sequelize'
 
 export default (sequelize) =>{
-    class Chat extends Model{
+    class Assignment extends Model{
         static associate(models){
             this.belongsTo(models.User, {foreignKey:'userId'});
+            this.belongsTo(models.UserRequest, {foreignKey:'userRequestId'});
         }
     }
-    Chat.init({
-        chatId:{type:DataTypes.INTEGER, autoIncrement:true, primaryKey:true},
-        senderId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId'}},
-        receiverId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId'}},
+    Assignment.init({
+        assignmentId:{type:DataTypes.INTEGER, autoIncrement:true, primaryKey:true},
+        userId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId'}},
+        professionalId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId'}},
+        userRequestId:{type:DataTypes.INTEGER, references:{model:'userRequest', key:'userRequestId'}},
         createdDate:{type:DataTypes.DATE, allowNull:false, defaultValue:DataTypes.NOW}, 
         createdTime:{type:DataTypes.TIME, allowNull:false, defaultValue:DataTypes.NOW}, 
-        text:{type:DataTypes.TEXT, allowNull:false},
-        read:{type:DataTypes.BOOLEAN, allowNull:false},
-    },{sequelize,modelName:'Chat', tableName:'chat'});
-    return Chat
+        
+    },{sequelize,modelName:'Assignment', tableName:'assignment'});
+    return Assignment
 }
 /*
 1 - eligible
