@@ -3,8 +3,9 @@ import {DataTypes, Model} from 'sequelize'
 export default (sequelize) =>{
     class Assignment extends Model{
         static associate(models){
-            this.belongsTo(models.User, {foreignKey:'userId'});
-            this.belongsTo(models.UserRequest, {foreignKey:'userRequestId'});
+            this.belongsTo(models.User, {foreignKey:'userId', as:'assignmentUserId'});
+            this.belongsTo(models.User, {foreignKey:'professionalId', as:'assignmentprofessionalId'});
+            this.belongsTo(models.UserRequest, {foreignKey:'userRequestId', as:'assignmentRequestId'});
         }
     }
     Assignment.init({
