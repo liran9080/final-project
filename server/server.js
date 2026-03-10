@@ -8,6 +8,8 @@ import authRoutes from './src/routes/auth.routes.js'
 import commentRoutes from './src/routes/comment.routes.js'
 import foundationRoutes from './src/routes/foundation.routes.js'
 import searchRouter from './src/routes/search.routes.js'
+import assignmentRouter from './src/routes/assignment.routes.js'
+import userRequestRouter from './src/routes/userRequest.routes.js'
 
 import tokenService from './src/middleware/token.service.js'
 
@@ -31,6 +33,12 @@ app.use('/api/comments', commentRoutes)
 // /api/foundations /1
 app.use('/api/foundations', foundationRoutes)
 app.use('/api/search', searchRouter)
+app.use('/api/userrequests', userRequestRouter)
+app.use('/api/assignments', assignmentRouter)
+// React -- GET http://127.0.0.1/api/assignments/users/12 -> server.js --
+// --> assignmentRouter --> assignmentController --> assignmentService --
+// --> assignmentController -> React
+
 
 
 

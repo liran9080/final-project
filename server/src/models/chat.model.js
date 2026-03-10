@@ -13,7 +13,7 @@ export default (sequelize) =>{
         createdDate:{type:DataTypes.DATE, allowNull:false, defaultValue:DataTypes.NOW}, 
         createdTime:{type:DataTypes.TIME, allowNull:false, defaultValue:DataTypes.NOW}, 
         text:{type:DataTypes.TEXT, allowNull:false},
-        read:{type:DataTypes.BOOLEAN, allowNull:false},
+        read:{type:DataTypes.BOOLEAN, allowNull:false, defaultValue:false},
     },{sequelize,modelName:'Chat', tableName:'chat'});
     return Chat
 }

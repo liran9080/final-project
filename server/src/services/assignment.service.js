@@ -6,7 +6,7 @@ import AppError from '../errors/appError.js'
 const { Assignment } = models
 
 
-const getAssignmentssByUserId = async (userId) => {
+const getAssignmentsByUserId = async (userId) => {
 
     const assignments = await Assignment.findAll({ raw: true, where: { userId: userId } })
 
@@ -41,4 +41,4 @@ const addAssignment = async (assignment) => {
     return createdAssignment;
 }
 
-export default {addAssignment, getAssignmentsByProfessionalId, getAssignmentssByUserId}
+export default {addAssignment, getAssignmentsByProfessionalId, getAssignmentsByUserId}

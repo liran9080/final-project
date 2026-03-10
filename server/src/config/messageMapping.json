@@ -6,6 +6,15 @@
     "invalid_userId": "המשתמש המחובר אינו המשתמש בתגובה",
     "invalid_commentId": "מזהה התגובה אינו תקין"
   },
+  "userRequest":{
+    "not_found": "הבקשה לא נמצאה",
+    "foundation_not_found": "העמותה לבקשה אינה קיימת",
+    "benefit_not_found": "הזכות לבקשה אינה קיימת",
+    "invalid_status": "סטטוס הבקשה אינו תקין",
+    "invalid_request_id":"מספר הבקשה לא תקין או חסר",
+    "invalid_user_id":"מזהה המשתמש לא תקין או חסר",
+    "invalid_userRequest":"הבקשה לא תקינה או חסרה"
+  },
   "user": {
     "not_found": "המשתמש לא נמצא",
     "email_exist": "האימייל שהוקלד נמצא בשימוש",
