@@ -76,7 +76,7 @@ function FoundationDetails() {
             <p>{foundation.phone}</p>
             <p>{foundation.email}</p>
             <hr/>
-            {isLoggedin() && <CreateRequest />}
+            {isLoggedin() && <CreateRequest foundationId={foundation.foundationId} categoryId={foundation.categoryId}/>}
             <hr/>
             <AddComment foundationId={foundation.foundationId} postSave={postCommentSave} />
             <Modal component={<EditComment commentId={itemId} onClose={closeEditItem} postSave={postCommentSave} />} onClose={closeEditItem} isOn={itemId > -1} />
