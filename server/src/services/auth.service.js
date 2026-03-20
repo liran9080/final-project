@@ -4,7 +4,7 @@ import AppError from '../errors/appError.js'
 import userService from './user.service.js'
 import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 
-const { User } = models
+const { User, ProfessionalFoundation } = models
 
 const register = async(user) => {
 
@@ -15,6 +15,9 @@ const register = async(user) => {
     return createdUser.get();
 }
 
+const assignToFoundation = async (proffessionalAssignment) => {
+    await ProfessionalFoundation.create(proffessionalAssignment);
+}
 
 const login = async (email, password) => {
 
@@ -36,4 +39,4 @@ const login = async (email, password) => {
 }
 
 
-export default { register, login }
+export default { register, login, assignToFoundation }

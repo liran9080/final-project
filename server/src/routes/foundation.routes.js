@@ -7,7 +7,7 @@ const foundationRouter = express.Router()
 
 // כתבתי כאן את הקוד שצריך להיות בסרביס לטובת אימון
 foundationRouter.get('/categories/:categoryId', controller.getFoundationsByCategory)
-
+foundationRouter.get('', controller.getAllFoundations)
 foundationRouter.get('/areas', controller.getAreas)
 foundationRouter.get('/:foundationId', controller.getFoundation)
 

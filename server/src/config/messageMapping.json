@@ -28,7 +28,10 @@
   "auth": {
     "not_admin": "דרושה הרשאת מנהל",
     "email_password_incorrect": "שם משתמש או סיסמא אינם נכונים",
-    "user_disabled": "משתמש זה מושבת"
+    "user_disabled": "משתמש זה מושבת",
+    "email_exists":"אימייל זה קיים במערכת",
+    "invalid_foundation":"יש לבחור עמותה לאיש מקצוע",
+    "foundation_not_found":"העמותה לא נמצאה"
   },
   "benefit":{
     "not_found": "זכות לא נמצאה",

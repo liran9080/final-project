@@ -7,6 +7,9 @@ const getFoundation = ({id}) => {
 const getFoundations = ({id}) => {
      return fetch(`${SERVER}/api/foundations/categories/${id}`);
 }
+const getAllFoundations = () => {
+     return fetch(`${SERVER}/api/foundations`);
+}
 const getFoundationAreas = ({token}) => {
      return fetch(`${SERVER}/api/foundations/areas`);
 }
@@ -25,4 +28,4 @@ const updateFoundation = ({token, id, data}) =>{
      }); 
 }
 
-export default {getFoundation, getFoundations, getFoundationAreas, addFoundation, updateFoundation}
+export default {getFoundation, getFoundations,getAllFoundations, getFoundationAreas, addFoundation, updateFoundation}

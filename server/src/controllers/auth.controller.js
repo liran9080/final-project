@@ -1,6 +1,8 @@
 import service from '../services/auth.service.js'
 import userService from '../services/user.service.js'
+import foundationService from '../services/foundation.service.js'
 import tokenService from '../middleware/token.service.js'
+import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 
 const ADMIN_CODE = '12rsd1'
 const SECOND = 1000;
@@ -23,7 +25,9 @@ const isBlocked = (email) =>{
 
 
 const register = async (req, res) => {
-    const { user, adminCode } = req.body;
+    const { user, adminCode, foundationId } = req.body;
+
+    
     try {
         if (adminCode && adminCode == ADMIN_CODE) {    // אם המשתמש קיבל קוד מהנהלת האתר (לא חשוב איך) אז הוא ירשם כמנהל מערכת
             user.isAdmin = true;
@@ -32,10 +36,27 @@ const register = async (req, res) => {
         }
         const existingUser = await userService.findUserByEmail(user.email); // נבדוק אם האימייל כבר קיים
         if (existingUser) {   // אם האימייל קיים נחזיר שגיאה עם הודעה
-            res.status(400).send({ message: 'email already exist' });
+            res.status(400).send({ message: messageMapping.auth.email_exists});
             return;
         }
+        // אם המשתמש נרשם כאיש מקצוע נוודא שהעמותה קיימת
+        if(user.isProfessional){
+            if(!foundationId){
+                res.status(400).send({ message: messageMapping.auth.invalid_foundation });
+                return;
+            }
+            const foundation = await foundationService.getFoundation(foundationId)
+            if(!foundation){
+                res.status(400).send({ message: messageMapping.auth.foundation_not_found });
+                return;
+            }
+        }
         const createdUser = await service.register(user);   // יצירת המשתמש החדש
+        if(user.isProfessional ){
+            const professionalAssignment = {foundationId:foundationId, professionalId:createdUser.userId}
+            console.log(createdUser);
+            await service.assignToFoundation(professionalAssignment)
+        }
         res.status(201).send(createdUser)
     } catch (error) {
         res.status(error.httpCode || 500).json({ message: error.message })

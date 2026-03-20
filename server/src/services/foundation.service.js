@@ -4,6 +4,11 @@ import { Op } from 'sequelize'
 const { Foundation } = models
 import { isCategoryExists } from './categories.service.js';
 
+const getAllFoundations = async (foundationId) => {
+    const foundations = await Foundation.findAll()
+
+    return foundations
+}
 const getFoundation = async (foundationId) => {
     const foundation = await Foundation.findByPk(foundationId)
 
@@ -86,4 +91,4 @@ const searchFoundations = async (text, area) => {
     return results;
 }
 
-export default { getFoundation, getFoundationsByCategory, addFoundation, updateFoundation, deleteFoundation, getAreas, searchFoundations }
+export default { getFoundation, getAllFoundations, getFoundationsByCategory, addFoundation, updateFoundation, deleteFoundation, getAreas, searchFoundations }

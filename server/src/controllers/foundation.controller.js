@@ -3,6 +3,20 @@ import foundationService from '../services/foundation.service.js'
 
 //isCategoryExists(benefit.categoryId)
 
+const getAllFoundations = async (req, res) => {
+    try { 
+        const foundations = await foundationService.getAllFoundations()
+        if (foundations) {
+            res.json(foundations);
+        } else {
+            res.status(404).json({ message: `foundation ${foundationId} not found` });
+        }
+    } catch (error) {
+        res.status(error.httpCode || 500).send({ message: error.message })
+    }
+    
+}
+
 const getFoundation = async (req, res) => {
     const { foundationId } = req.params;
 
@@ -69,4 +83,4 @@ const getAreas = (req, res) => {
     const areas = foundationService.getAreas()
     res.json(areas)
 }
-export default { getFoundationsByCategory, addFoundation, getFoundation, deleteFoundation, updateFoundation, getAreas }
+export default { getFoundationsByCategory, getAllFoundations, addFoundation, getFoundation, deleteFoundation, updateFoundation, getAreas }
