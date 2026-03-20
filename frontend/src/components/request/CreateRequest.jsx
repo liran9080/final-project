@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import useHttp from '../../hooks/useHttp';
 import benefitApi from '../../api/benefitApi';
 import Select from '../Select';
@@ -8,10 +8,12 @@ import userRequestApi from '../../api/userRequestApi';
 import PageHead from '../PageHead';
 import Message from '../Message';
 import Spinner from '../Spinner';
+import AuthContext from '../../context/AuthContext';
 
 const CreateRequest = ({categoryId, foundationId}) => {
+    const {authData} = useContext(AuthContext)
     const [benefits, setBenefits] = useState([]);
-    const [userRequest, setUserRequest] = useState({userId:0, benefitId:-1, foundationId, details:'', status:'pending' })
+    const [userRequest, setUserRequest] = useState({userId:authData.user.userId, benefitId:-1, foundationId, details:'', status:'pending' })
     const { send, message, setMessage, setIsError, loading, isError } = useHttp(true)
 
     const handlechange = (event) =>{
