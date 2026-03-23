@@ -19,6 +19,15 @@ const assignToFoundation = async (proffessionalAssignment) => {
     await ProfessionalFoundation.create(proffessionalAssignment);
 }
 
+const getFoundation = async (userId) =>{
+    const proffessionalAssignment = await ProfessionalFoundation.findOne({
+        where: {
+            professionalId: userId
+        }
+    })
+    return proffessionalAssignment
+}
+
 const login = async (email, password) => {
 
     // מוודאים שהאימייל לא קיים
@@ -39,4 +48,4 @@ const login = async (email, password) => {
 }
 
 
-export default { register, login, assignToFoundation }
+export default { register, login, assignToFoundation, getFoundation }

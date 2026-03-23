@@ -70,6 +70,14 @@ const getUserRequestsByUserId = async (req, res) => {
     }
 }
 
+const getRequestsByFoundation = async (req, res) => {
+    try{
+        const {foundationId} = req.params;
+        const userRequests = await userRequestService.getRequestsByFoundation(foundationId);
+        res.send(userRequests)
+    }catch (error) {
+        res.status(error.httpCode || 500).send({ message: error.message })
+    }
+}
 
-
-export default {getUserRequest, getUserRequestsByUserId, addUserRequest, updateUserRequestStatus}
+export default {getUserRequest,getRequestsByFoundation, getUserRequestsByUserId, addUserRequest, updateUserRequestStatus}

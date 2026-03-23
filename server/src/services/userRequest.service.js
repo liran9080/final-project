@@ -62,4 +62,8 @@ const updateUserRequestStatus = async (userRequestId, status) => {
     return updatedUserRequest;
 }
 
-export default {getUserRequest, getUserRequestsByUserId, addUserRequest, updateUserRequestStatus}
+const getRequestsByFoundation = async(foundationId) => {
+    const userRequests = await UserRequest.findAll({ raw: true, where: { foundationId: foundationId} } )
+    return userRequests;
+}
+export default {getUserRequest, getRequestsByFoundation, getUserRequestsByUserId, addUserRequest, updateUserRequestStatus}

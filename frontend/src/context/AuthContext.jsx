@@ -1,7 +1,7 @@
 import { useState, createContext, useEffect } from "react"
 
 const AuthContext = createContext({
-    authData: {token:'', user:{userId:0, fullName:'', isAdmin:false, email:''}},
+    authData: {token:'', user:{userId:0, fullName:'', isAdmin:false, email:''}, foundationId:-1},
     setAuthData: (authData) => { },
     updateUserData: (user) => { },
     clearAuthData: () => { },
@@ -17,15 +17,17 @@ export const AuthContextProvider = ({ children }) => {
     }
     const isLoggedin = () => authData !== null;
     const isAdmin = () => authData && authData.user.isAdmin == true
-    const updateUserData = (user) => { 
+    const updateUserData = (user, foundationId=-1) => { 
         setAuthData( currentUser => {
             const updatedAuthData = {...currentUser};
             updatedAuthData.user.fullName = user.fullName;
             updatedAuthData.user.email = user.email;
+            updatedAuthData.foundationId = foundationId
             sessionStorage.setItem('auth', JSON.stringify(updatedAuthData))
             return updatedAuthData
         })
     }
+    
     useEffect(() => {
         const jsonData = sessionStorage.getItem('auth');
         if (jsonData) {

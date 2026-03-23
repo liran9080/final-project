@@ -76,7 +76,12 @@ const login = async (req, res) => {
         // console.log('{userId: existingUser.userId, isAdmin:existingUser.isAdmin}', existingUser, {userId: existingUser.userId, isAdmin:existingUser.isAdmin});
         
         const token = tokenService.createToken({userId: existingUser.userId, isAdmin:existingUser.isAdmin})
-        res.send({ user:existingUser, token })
+        let foundationId = -1;
+        if(existingUser.isProfessional){
+            const professionalAssignment = await service.getFoundation(existingUser.userId)
+            foundationId = professionalAssignment.foundationId
+        }
+        res.send({ user:existingUser, token, foundationId: foundationId })
     } catch (error) {
         addLoginAttempt(email)
         res.status(error.httpStatus || 400).json({ message: error.message });
