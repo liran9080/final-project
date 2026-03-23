@@ -1,5 +1,6 @@
 
 import userRequestService from '../services/userRequest.service.js'
+import assignmentService from '../services/assignment.service.js'
 import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 import AppError from '../errors/appError.js'
 
@@ -20,6 +21,23 @@ const addUserRequest = async (req, res) => {
         res.status(error.httpCode || 500).send({ message: error.message })
     }
 }
+
+const acceptRequest = async (req, res) =>{
+    const {status, assignment} = req.body;
+    const {userRequestId} = req.params;
+    try {
+        if (!userRequestId) {
+            res.status(400).send({ message: messageMapping.userRequest.invalid_request_id})
+            return;
+        }
+        const createdAssignment = await assignmentService.addAssignment(assignment);
+        const updatedUserRequest = await userRequestService.updateUserRequestStatus(userRequestId, status);
+        res.status(200).send({createdAssignment, updatedUserRequest})
+    } catch (error) {
+        res.status(error.httpCode || 500).send({ message: error.message })
+    }
+}
+
 const updateUserRequestStatus = async (req, res) => {
     const status = req.body;
     const {userRequestId} = req.params;
@@ -80,4 +98,4 @@ const getRequestsByFoundation = async (req, res) => {
     }
 }
 
-export default {getUserRequest,getRequestsByFoundation, getUserRequestsByUserId, addUserRequest, updateUserRequestStatus}
+export default {getUserRequest, getRequestsByFoundation, getUserRequestsByUserId, acceptRequest, addUserRequest, updateUserRequestStatus}

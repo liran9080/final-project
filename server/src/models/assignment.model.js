@@ -8,6 +8,7 @@ export default (sequelize) =>{
             this.belongsTo(models.UserRequest, {foreignKey:'userRequestId', as:'assignmentRequestId'});
         }
     }
+    
     Assignment.init({
         assignmentId:{type:DataTypes.INTEGER, autoIncrement:true, primaryKey:true},
         userId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId'}},

@@ -9,6 +9,7 @@ assignmentRouter.get('/foundations/:foundationId', tokenService.verifyToken, use
 assignmentRouter.get(':userRequestId',tokenService.verifyToken, userRequestController.getUserRequest)
 assignmentRouter.get('users/:userId', tokenService.verifyToken, userRequestController.getUserRequestsByUserId)
 assignmentRouter.post('',tokenService.verifyToken, userRequestController.addUserRequest);
-assignmentRouter.put('',tokenService.verifyToken, userRequestController.updateUserRequestStatus);
+assignmentRouter.put(':userRequestId',tokenService.verifyToken, userRequestController.updateUserRequestStatus);
+assignmentRouter.put('/accept/:userRequestId',tokenService.verifyToken, userRequestController.acceptRequest);
 
 export default assignmentRouter;

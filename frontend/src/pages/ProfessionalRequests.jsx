@@ -4,6 +4,7 @@ import CreateMessage from '../components/chat/CreateMessage';
 import professionalRequestApi from "../api/professionalRequestApi";
 import useHttp from "../hooks/useHttp";
 import AuthContext from "../context/AuthContext";
+import Message from '../components/Message'
 
 
 const ProfessionalRequests = () => {
@@ -22,13 +23,17 @@ const ProfessionalRequests = () => {
                 });
             if (result.ok)
                 setPendingRequests(result.data)
-            console.log(result);
-        } else {
-            console.log("not a professional");
-
         }
-
-
+    }
+    const acceptRequest = async (request) => {
+        const data = {assignment:{userId: request.userId, professionalId:authData.user.userId, userRequestId: 0}, status:'done'}
+        const result = await send({
+                 func: professionalRequestApi.acceptRequests, 
+                 id: request.userRequestId,
+                 data:data
+                });
+            if (result.ok)
+                setPendingRequests(result.data)
     }
     useEffect(() => {
         // load number of pending requests and save into pendingRequests
@@ -36,8 +41,15 @@ const ProfessionalRequests = () => {
     }, [])
     return (
         <div>
+            <Message message={message} isError={isError} />
             <p> <span>{pendingRequests.length}</span> בקשות ממתינות</p>
-            <button>get next assignment</button>
+            
+            <div style={{display:'flex', flexWrap:'wrap '}}>
+                {
+                pendingRequests.map( pr => <RequestItem key={pr.userRequestId} request={pr} accept={acceptRequest} isProfessional={true}/>)
+                }
+            </div>
+            
             {selectedRequest != null && <>
                 <RequestItem />
                 <CreateMessage />
