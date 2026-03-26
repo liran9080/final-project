@@ -11,9 +11,9 @@ const CreateMessage = (props) => {
     return (
         // עוטף את הטופס של יצירת ההודעה
         <div className="create-message-area">
-            // מציג כותרת עם השם המלא של המשתמש שאני שולח לו
+            {/*מציג כותרת עם השם המלא של המשתמש שאני שולח לו*/}
             <h3>Send message to: {targetUser.fullName}</h3>
-            // שדה טקסט כדי להקליד בו את ההודעה
+            {/* שדה טקסט כדי להקליד בו את ההודעה */}
             <input type="text" placeholder="Type a message..." />
             // כפתור לשליחת ההודעה
             <button>Send</button>

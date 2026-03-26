@@ -18,3 +18,7 @@
     font-weight: bold;
     color: #dedede;
 }
+.chat-user-messages{
+    height:10vw;
+    overflow-y: auto;
+}

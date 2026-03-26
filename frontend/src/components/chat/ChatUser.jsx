@@ -26,10 +26,11 @@ const ChatUser = (props) => {
             <p className="user-name">{authData.user.fullName}</p>
             <p className="user-name">{props.name}</p>
             </div>
-            
+            <div className='chat-user-messages'>
             {
                 chats.map( chat => <ChatMessage key={chats.chatId} message={chat} loginId={authData.user.userId}/>)
             }
+            </div>
         </div>
     );
 }

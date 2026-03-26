@@ -7,4 +7,6 @@
     flex-direction: column;
     /* מוסיף מרווח קבוע של 10 פיקסלים בין משתמש למשתמש */
     gap: 10px;
+    height: 40vh;
+    overflow-y: auto;
 }
