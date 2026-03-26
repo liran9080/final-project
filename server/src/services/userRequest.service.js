@@ -3,8 +3,10 @@ import models from '../models/index.js'
 import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 import foundationService from './foundation.service.js'
 import benefitService from './benefits.service.js'
+import userModel from '../models/user.model.js';
+import userrequestModel from '../models/userrequest.model.js';
 
-const { UserRequest } = models
+const { UserRequest, User, Benefit, Foundation } = models
 const validStatus = ["pending", "done"]
 
 const getUserRequest = async (userRequestId) => {
@@ -19,7 +21,15 @@ const getUserRequest = async (userRequestId) => {
 
 
 const getUserRequestsByUserId = async (userId) => {
-    const userRequests = await UserRequest.findAll({ raw: true, where: { userId: userId} } )
+    const userRequests = await UserRequest.findAll({ 
+        raw: true, 
+        where: { userId: userId},
+        include:[
+            {model: User, as: 'requestUser'},
+            {model: Benefit, as: 'requestBenefit'},
+            {model: Foundation, as:'userRequestFoundation'}
+        ]
+    } )
     return userRequests;
 }
 
@@ -63,7 +73,11 @@ const updateUserRequestStatus = async (userRequestId, status) => {
 }
 
 const getRequestsByFoundation = async(foundationId) => {
-    const userRequests = await UserRequest.findAll({ raw: true, where: { foundationId: foundationId} } )
+    const userRequests = await UserRequest.findAll({ 
+        aw: true, 
+        where: { foundationId: foundationId},
+        include:[{model: User, as: 'requestUser'},{model: Benefit, as: 'requestBenefit'}] 
+    })
     return userRequests;
 }
 export default {getUserRequest, getRequestsByFoundation, getUserRequestsByUserId, addUserRequest, updateUserRequestStatus}

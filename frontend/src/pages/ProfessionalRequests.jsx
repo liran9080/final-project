@@ -26,14 +26,21 @@ const ProfessionalRequests = () => {
         }
     }
     const acceptRequest = async (request) => {
-        const data = {assignment:{userId: request.userId, professionalId:authData.user.userId, userRequestId: 0}, status:'done'}
+        const data = {assignment:{userId: request.userId, professionalId:authData.user.userId, userRequestId: request.userRequestId}, status:'done'}
         const result = await send({
                  func: professionalRequestApi.acceptRequests, 
                  id: request.userRequestId,
                  data:data
                 });
-            if (result.ok)
-                setPendingRequests(result.data)
+            if (result.ok){
+                const updateRequest = result.data.updatedUserRequest;
+                const requestIndex = pendingRequests.findIndex(r => request.userRequestId == updateRequest.userRequestId )
+                if(requestIndex > -1){
+                    const temp = [result.data];
+                    temp[requestIndex] = updateRequest
+                    setPendingRequests(temp)
+                }
+            }
     }
     useEffect(() => {
         // load number of pending requests and save into pendingRequests
@@ -46,7 +53,7 @@ const ProfessionalRequests = () => {
             
             <div style={{display:'flex', flexWrap:'wrap '}}>
                 {
-                pendingRequests.map( pr => <RequestItem key={pr.userRequestId} request={pr} accept={acceptRequest} isProfessional={true}/>)
+                pendingRequests.map( pr => <RequestItem showStatus={true} key={pr.userRequestId} request={pr} accept={acceptRequest} isProfessional={true}/>)
                 }
             </div>
             

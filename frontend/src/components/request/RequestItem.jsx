@@ -6,12 +6,12 @@ const RequestItem = ({request, showStatus=false, accept=()=>{}, isProfessional})
 
     return(
         <div className='request-item'>
-            <p>תאריך: {isoDateToDisplay(request.createdAt)}</p>
-            <p>פרטי מבקש:{request.userId}</p>
-            <p> זכות{request.benefitId}</p>
+            <p>תאריך: <span style={{direction:'ltr', display: 'inline-block'}}>{isoDateToDisplay(request.createdAt)}</span></p>
+            <p>פרטי מבקש: {request.requestUser.fullName}</p>
+            <p>זכות: {request.requestBenefit.title}</p>
             <p>{request.details}</p>
-            {showStatus && <p>status</p>}
-            {isProfessional && <button onClick={() => accept(request)}>קבלת בקשה</button>}
+            {showStatus && <p>{request.status}</p>}
+            {isProfessional && request.status == 'pending' && <button onClick={() => accept(request)}>קבלת בקשה</button>}
         </div>
     )
 }

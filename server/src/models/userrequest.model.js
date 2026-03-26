@@ -4,9 +4,9 @@ import {DataTypes, Model} from 'sequelize'
 export default (sequelize) =>{
     class UserRequest extends Model{
         static associate(models){
-            this.belongsTo(models.User, {foreignKey:'userId', as:'requestUserId'})
-            this.belongsTo(models.Benefit, {foreignKey:'benefitId', as:'requestBenefitId'})
-            this.belongsTo(models.Foundation, {foreignKey: 'foundationId', as: 'userRequestFoundationId'})
+            this.belongsTo(models.User, {foreignKey:'userId', as:'requestUser'})
+            this.belongsTo(models.Benefit, {foreignKey:'benefitId', as:'requestBenefit'})
+            this.belongsTo(models.Foundation, {foreignKey: 'foundationId', as: 'userRequestFoundation'})
         }
     }
     UserRequest.init({

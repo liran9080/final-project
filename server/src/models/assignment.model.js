@@ -1,11 +1,11 @@
-import {DataTypes, Model} from 'sequelize'
+import {DataTypes, Model, literal} from 'sequelize'
 
 export default (sequelize) =>{
     class Assignment extends Model{
         static associate(models){
-            this.belongsTo(models.User, {foreignKey:'userId', as:'assignmentUserId'});
-            this.belongsTo(models.User, {foreignKey:'professionalId', as:'assignmentprofessionalId'});
-            this.belongsTo(models.UserRequest, {foreignKey:'userRequestId', as:'assignmentRequestId'});
+            this.belongsTo(models.User, {foreignKey:'userId', as:'assignmentUser'});
+            this.belongsTo(models.User, {foreignKey:'professionalId', as:'assignmentprofessional'});
+            this.belongsTo(models.UserRequest, {foreignKey:'userRequestId', as:'assignmentRequest'});
         }
     }
     
@@ -15,7 +15,7 @@ export default (sequelize) =>{
         professionalId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId'}},
         userRequestId:{type:DataTypes.INTEGER, references:{model:'userRequest', key:'userRequestId'}},
         createdDate:{type:DataTypes.DATE, allowNull:false, defaultValue:DataTypes.NOW}, 
-        createdTime:{type:DataTypes.TIME, allowNull:false, defaultValue:DataTypes.NOW}, 
+        createdTime:{type:DataTypes.TIME, allowNull:false, defaultValue:literal('NOW()')}, 
         
     },{sequelize,modelName:'Assignment', tableName:'assignment'});
     return Assignment
