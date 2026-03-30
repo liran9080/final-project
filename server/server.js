@@ -10,6 +10,7 @@ import foundationRoutes from './src/routes/foundation.routes.js'
 import searchRouter from './src/routes/search.routes.js'
 import assignmentRouter from './src/routes/assignment.routes.js'
 import userRequestRouter from './src/routes/userRequest.routes.js'
+import chatRouter from './src/routes/chat.routes.js'
 
 import tokenService from './src/middleware/token.service.js'
 
@@ -35,6 +36,7 @@ app.use('/api/foundations', foundationRoutes)
 app.use('/api/search', searchRouter)
 app.use('/api/userrequests', userRequestRouter)
 app.use('/api/assignments', assignmentRouter)
+app.use('/api/chats', chatRouter);
 // React -- GET http://127.0.0.1/api/assignments/users/12 -> server.js --
 // --> assignmentRouter --> assignmentController --> assignmentService --
 // --> assignmentController -> React
@@ -43,7 +45,7 @@ app.use('/api/assignments', assignmentRouter)
 
 
 const startServer = async () => {
-    await sequelize.sync({alter:true})
+    await sequelize.sync({alter:false})
     // const category = await models.Category.create({
     //     name:'השכלה'
     // })

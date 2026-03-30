@@ -36,5 +36,10 @@
   "benefit":{
     "not_found": "זכות לא נמצאה",
     "deleted_ok":"הזכות נמחקה בהצלחה"
+  },
+  "chat":{
+    "missing_participants": "אחד או יותר מפרטי השיחה חסרים",
+    "no_permissions": "רק חברי השיחה יכולים לצפות בתוכן השיחה",
+    "invalid_message":"הודעה ריקה"
   }
 }

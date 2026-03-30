@@ -1,6 +1,5 @@
 import {Op} from 'sequelize'
 import models from '../models/index.js'
-import foundationService from './foundation.service.js'
 import userService from './user.service.js'
 import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 import AppError from '../errors/appError.js'

@@ -7,7 +7,7 @@ import ChatUser from './ChatUser';
 import '../../css/ChatList.css';
 
 // מגדיר קומפוננטה שמקבלת את רשימת המשתמשים
-const ChatList = (props) => {
+const ChatUserList = (props) => {
     // מחזיר את התצוגה של הרשימה למסך
     return (
         
@@ -15,11 +15,11 @@ const ChatList = (props) => {
             {/** עובר על מערך המשתמשים אחד אחד עם לולאת map */}
             {props.users.map((user) => {
                 {/** מדפיס את הקומפוננטה של המשתמש עם השם שלו ומפתח ייחודי */}
-                return <ChatUser key={user.userId} name={user.fullName} />;
+                return <ChatUser key={user.userId} name={user.fullName} onClick={() => props.showMessages(user.userId)}/>;
             })}
         </div>
     );
 }
 
 // מאפשר לקבצים אחרים להשתמש ברשימה הזו
-export default ChatList;
+export default ChatUserList;

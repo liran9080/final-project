@@ -3,19 +3,30 @@ import userService from './user.service.js'
 import messageMapping from '../config/messageMapping.json' with {type: 'json'}
 import AppError from '../errors/appError.js'
 
-const { Assignment } = models
+const { User, Assignment } = models
 
 
 const getAssignmentsByUserId = async (userId) => {
 
-    const assignments = await Assignment.findAll({ raw: true, where: { userId: userId } })
+    const assignments = await Assignment.findAll({ 
+        raw: true, 
+        where: { userId: userId },
+        include:[
+            {model: User, as: 'assignmentprofessional'},
+        ] })
 
     return assignments.sort((c1, c2) => c1.createdDate.toString().localeCompare(c2.createdDate.toString()))
 }
 
 const getAssignmentsByProfessionalId = async (professionalId) => {
 
-    const assignments = await Assignment.findAll({ raw: true, where: { professionalId: professionalId } })
+    const assignments = await Assignment.findAll({ 
+        raw: true, 
+        where: { professionalId: professionalId },
+        include:[
+            {model: User, as: 'assignmentUser'},
+        ]
+     })
 
     return assignments.sort((c1, c2) => c1.createdDate.toString().localeCompare(c2.createdDate.toString()))
 }
