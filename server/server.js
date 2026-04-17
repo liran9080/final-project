@@ -11,6 +11,7 @@ import searchRouter from './src/routes/search.routes.js'
 import assignmentRouter from './src/routes/assignment.routes.js'
 import userRequestRouter from './src/routes/userRequest.routes.js'
 import chatRouter from './src/routes/chat.routes.js'
+import professionalFoundationRouter from './src/routes/professionalFoundation.routes.js'
 
 import tokenService from './src/middleware/token.service.js'
 
@@ -37,6 +38,7 @@ app.use('/api/search', searchRouter)
 app.use('/api/userrequests', userRequestRouter)
 app.use('/api/assignments', assignmentRouter)
 app.use('/api/chats', chatRouter);
+app.use('/api/professionalfoundations', professionalFoundationRouter);
 // React -- GET http://127.0.0.1/api/assignments/users/12 -> server.js --
 // --> assignmentRouter --> assignmentController --> assignmentService --
 // --> assignmentController -> React

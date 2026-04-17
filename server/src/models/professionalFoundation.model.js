@@ -3,13 +3,13 @@ import {DataTypes, Model} from 'sequelize'
 export default (sequelize) =>{
     class ProfessionalFoundation extends Model{
         static associate(models){
-            this.belongsTo(models.User, {foreignKey:'userId'});
-            this.belongsTo(models.Foundation, {foreignKey:'foundationId'});
+            this.belongsTo(models.User, {foreignKey:'userId', as:'user'});
+            this.belongsTo(models.Foundation, {foreignKey:'foundationId', as:'foundation'});
         }
     }
     ProfessionalFoundation.init({
         foundationId:{type:DataTypes.INTEGER, references:{model:'foundations', key:'foundationId'}},
-        professionalId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId', primaryKey:true}},
+        professionalId:{type:DataTypes.INTEGER, references:{model:'users', key:'userId'}, primaryKey:true},
         
     },{sequelize,modelName:'ProfessionalFoundation', tableName:'professionalFoundation'});
     return ProfessionalFoundation

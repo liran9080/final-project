@@ -41,5 +41,9 @@
     "missing_participants": "אחד או יותר מפרטי השיחה חסרים",
     "no_permissions": "רק חברי השיחה יכולים לצפות בתוכן השיחה",
     "invalid_message":"הודעה ריקה"
+  },
+  "professionlFoundation":{
+    "missingProfessional":"מזהה איש המקצוע חסר",
+    "missingFoundation":"מזהה העמותה חסר"
   }
 }
